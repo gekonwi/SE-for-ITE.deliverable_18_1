@@ -62,7 +62,11 @@ class ItemsController < ApplicationController
   end
 
   def search
-
+    @types = ["PC Hardware", "Software", "Clothes", "Furniture", "Food"]
+    @items = []
+    (1..20).each do |i|
+      @items << Item.new(title: "Item #{i}", description: "Description #{i}", type: @types.sample)
+    end
   end
 
   private

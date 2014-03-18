@@ -1,1 +1,52 @@
-hallo!
+<p>
+	Use any part of the item's title or description to search for it.
+</p>
+
+<%= form_tag("search", method: "get") do %>
+	<%= label_tag(:query, "Search for:") %>
+	<%= text_field_tag(:query) %>
+
+	<br>
+	<br>
+
+	<%= radio_button_tag(:types, "all_types", checked: true) %>
+	<%= label_tag(:types_all, "all item types") %>
+	<br>
+	<%= radio_button_tag(:types, "specific_types") %>
+	<%= label_tag(:types_specific, "specific item types:") %>
+
+	<% @types.each do |type| %>
+		<%= check_box_tag(type) %>
+		<%= label_tag(type, type) %>
+	<% end %>
+
+	<br>
+	<br>
+
+	<%= submit_tag("Search") %>
+<% end %>
+
+	<br>
+	<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.type %></td>
+        <td><%= item.title %></td>
+        <td><%= item.description %></td>
+        <td><%= link_to 'Details', item %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

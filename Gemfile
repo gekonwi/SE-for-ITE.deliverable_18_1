@@ -32,6 +32,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+# for automatic indentations in erb files
+gem  'htmlbeautifier'
+
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
