@@ -9,10 +9,10 @@
 	<br>
 	<br>
 
-	<%= radio_button_tag(:types, "all_types", checked: true) %>
+	<%= radio_button_tag(:types, "all", checked: true) %>
 	<%= label_tag(:types_all, "all item types") %>
 	<br>
-	<%= radio_button_tag(:types, "specific_types") %>
+	<%= radio_button_tag(:types, "specific") %>
 	<%= label_tag(:types_specific, "specific item types:") %>
 
 	<% @types.each do |type| %>
@@ -29,24 +29,26 @@
 	<br>
 	<br>
 
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th></th>
-    </tr>
-  </thead>
+<% @items.any? do %>
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Type</th>
+	      <th>Title</th>
+	      <th>Description</th>
+	      <th></th>
+	    </tr>
+	  </thead>
 
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.type %></td>
-        <td><%= item.title %></td>
-        <td><%= item.description %></td>
-        <td><%= link_to 'Details', item %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	  <tbody>
+	    <% @items.each do |item| %>
+	      <tr>
+	        <td><%= item.type %></td>
+	        <td><%= item.title %></td>
+	        <td><%= item.description %></td>
+	        <td><%= link_to 'Details', item %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>

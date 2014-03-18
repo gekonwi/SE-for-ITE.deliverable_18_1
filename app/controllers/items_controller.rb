@@ -64,6 +64,9 @@ class ItemsController < ApplicationController
   def search
     @types = ["PC Hardware", "Software", "Clothes", "Furniture", "Food"]
     @items = []
+
+    return if params[:query].nil? || params[:query] == ""
+
     (1..20).each do |i|
       @items << Item.new(title: "Item #{i}", description: "Description #{i}", type: @types.sample)
     end
