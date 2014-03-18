@@ -1,7 +1,9 @@
 Lostandfound::Application.routes.draw do
-  resources :items
-
-get "items/search"
+  resources :items do
+   collection do
+    get 'search'
+  end
+end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
