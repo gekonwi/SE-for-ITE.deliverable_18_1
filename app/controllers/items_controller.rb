@@ -78,6 +78,7 @@ class ItemsController < ApplicationController
 
 	# returns all items which contain each word in the query as part of some word in its title or description
 	def find_items(query, sel_types)
+
 		# split the query into an array. \W means any "non-word" character
 		# and the "+" means to combine multiple delimiters
 		words = query.split(/\W+/)
@@ -88,13 +89,14 @@ class ItemsController < ApplicationController
 		first = true
 		words.each do |word|
 			q = "%#{word}%"
-			cur_set = Item.joins(:type).where("types.id IN (?) AND (items.title LIKE ? OR items.description LIKE ?)", type_ids, q, q).to_set
+			cur_set = Item.where("type_id IN (?) AND (title LIKE ? OR description LIKE ?)", type_ids, q, q).to_set
 
 			if first
 				first = false
 				items = cur_set
 			else
-				items.intersection(cur_set)
+				items = items.intersection(cur_set)
+				# can be set to "merge" instead of "intersection" for OR behavior
 			end
 		end
 
