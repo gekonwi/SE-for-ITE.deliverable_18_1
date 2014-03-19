@@ -82,7 +82,7 @@ class ItemsController < ApplicationController
 		# and the "+" means to combine multiple delimiters
 		words = query.split(/\W+/)
 
-		items = []
+		items = Set.new
 		type_ids = sel_types.map {|type| type.id}
 
 		first = true

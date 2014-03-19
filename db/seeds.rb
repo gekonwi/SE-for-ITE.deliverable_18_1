@@ -42,7 +42,7 @@ items["Food"] = %w{beef pork chicken bacon ham lamb liver kidneys turkey duck sa
 
 				people = ["some employee", "a student", "John", "Prof. McGonagall", "Harry", "someone"]
 
-				activities = ["on the way home", "while walking to the parking slot", "leaving campus", "walking nea the parc", ""]
+				activities = ["on the way home", "while walking to the parking slot", "leaving campus", "walking near the parc", ""]
 
 				places = ["in the toilet", "near the gym", "in room 774", "in the CS office", "on the street", "behind a tree", "next to a car"]
 
