@@ -71,13 +71,13 @@ class ItemsController < ApplicationController
 		@query = params[:query]
 		@query = "" if @query.nil?
 
-		@items = find_items(@query)
+		@items = find_items(@query, @sel_types)
 	end
 
 	private
 
 	# returns all items which contain each word in the query as part of some word in its title or description
-	def find_items(query)
+	def find_items(query, sel_types)
 		# split the query into an array. \W means any "non-word" character
 		# and the "+" means to combine multiple delimiters
 		words = query.split(/\W+/)
@@ -87,7 +87,7 @@ class ItemsController < ApplicationController
 		first = true
 		words.each do |word|
 			q = "%#{word}%"
-			cur_set = Item.where("title LIKE ? OR description LIKE ?", q, q).to_set
+			cur_set = Item.joins(:type).where("types.title IN (?) AND (items.title LIKE ? OR items.description LIKE ?)", sel_types, q, q).to_set
 
 			if first
 				first = false
