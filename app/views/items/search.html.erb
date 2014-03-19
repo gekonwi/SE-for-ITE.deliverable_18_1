@@ -32,25 +32,5 @@
 <br>
 
 <% @items.any? do %>
-	<table>
-	  <thead>
-	    <tr>
-	      <th>Type</th>
-	      <th>Title</th>
-	      <th>Description</th>
-	      <th>Lost by</th>
-	    </tr>
-	  </thead>
-
-	  <tbody>
-	    <% @items.each do |item| %>
-	      <tr>
-	        <td><%= item.type.title %></td>
-	        <td><%= item.title %></td>
-	        <td><%= item.description %></td>
-	        <td><%= item.owner %></td>
-	      </tr>
-	    <% end %>
-	  </tbody>
-	</table>
+	<%= render partial: 'table', locals: {show_links: false} %>
 <% end %>
