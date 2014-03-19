@@ -6,11 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-ItemType.destroy_all
+Type.destroy_all
 Item.destroy_all
 
-types = ["PC Hardware", "Clothes", "Furniture", "Food"]
-types.each {|type| ItemType.create(name: type)}
+type_titles = ["PC Hardware", "Clothes", "Furniture", "Food"]
+type_titles.each {|type| Type.create(title: type)}
 
 items = Hash.new
 
@@ -45,17 +45,19 @@ intros = ["According to the manufacturer", "Most users agree that", "Without a d
 
 
 100.times do
-	type = types.sample
+	type = Type.all.sample
 
 	title = ""
 	title += positive_adjectives.sample + " " if rand(3) == 0
 	title += title_prefixes.sample + " " if rand(3) == 0
-	title += items[type].sample
-	title += " (#{colors.sample})" if type != "Food" && rand(3) == 0
+	title += items[type.title].sample
+	title += " (#{colors.sample})" if type.title != "Food" && rand(3) == 0
 
 	description = intros.sample
 	description += " this product is #{positive_adjectives.sample}."
-	description += " It is #{taste_adjectives.sample} and #{taste_adjectives.sample} at the same time." if type == "Food"
+	description += " It is #{taste_adjectives.sample} and #{taste_adjectives.sample} at the same time." if type.title == "Food"
 
-	Item.create(type: type, title: title, description: description)
+	item = Item.new(title: title, description: description)
+	item.type = type
+	item.save
 end

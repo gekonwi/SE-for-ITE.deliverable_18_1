@@ -41,7 +41,7 @@
 	  <tbody>
 	    <% @items.each do |item| %>
 	      <tr>
-	        <td><%= item.type %></td>
+	        <td><%= item.type.title %></td>
 	        <td><%= item.title %></td>
 	        <td><%= item.description %></td>
 	        <td><%= link_to 'Details', item %></td>

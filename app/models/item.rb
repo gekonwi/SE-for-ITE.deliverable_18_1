@@ -1,3 +1,3 @@
 class Item < ActiveRecord::Base
-	self.inheritance_column = 'not_used'
+	belongs_to :type
 end

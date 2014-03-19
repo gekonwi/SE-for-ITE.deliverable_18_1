@@ -62,8 +62,9 @@ class ItemsController < ApplicationController
 	end
 
 	def search
-		@types = ItemType.all.map {|type| type.name}
+		@types = Type.all.map {|type| type.title}
 
+		# per default all types are selected
 		@sel_types = @types
 		@sel_types = params[:sel_types].to_set if !params[:sel_types].nil?
 
