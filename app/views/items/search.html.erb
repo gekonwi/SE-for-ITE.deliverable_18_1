@@ -14,8 +14,8 @@
 	<br>
 
 	<% @types.each do |type| %>
-		<%= check_box_tag("sel_types[]", type, @sel_types.member?(type)) %>
-		<%= label_tag(type, type) %>
+		<%= check_box_tag("sel_types[]", type.id, @sel_types.member?(type)) %>
+		<%= label_tag(type, type.title) %>
 	<% end %>
 
 	<br>

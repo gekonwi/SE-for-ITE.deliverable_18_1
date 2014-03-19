@@ -62,11 +62,11 @@ class ItemsController < ApplicationController
 	end
 
 	def search
-		@types = Type.all.map {|type| type.title}
+		@types = Type.all
 
 		# per default all types are selected
 		@sel_types = @types
-		@sel_types = params[:sel_types].to_set if !params[:sel_types].nil?
+		@sel_types = Type.where(:id => params[:sel_types]).to_set if !params[:sel_types].nil?
 
 		@query = params[:query]
 		@query = "" if @query.nil?
@@ -83,11 +83,12 @@ class ItemsController < ApplicationController
 		words = query.split(/\W+/)
 
 		items = []
+		type_ids = sel_types.map {|type| type.id}
 
 		first = true
 		words.each do |word|
 			q = "%#{word}%"
-			cur_set = Item.joins(:type).where("types.title IN (?) AND (items.title LIKE ? OR items.description LIKE ?)", sel_types, q, q).to_set
+			cur_set = Item.joins(:type).where("types.id IN (?) AND (items.title LIKE ? OR items.description LIKE ?)", type_ids, q, q).to_set
 
 			if first
 				first = false
