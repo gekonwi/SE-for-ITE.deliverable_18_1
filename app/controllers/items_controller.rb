@@ -71,13 +71,13 @@ class ItemsController < ApplicationController
 		@query = params[:query]
 		@query = "" if @query.nil?
 
-		@items = find_items(@query, @sel_types)
+		@items = find_items(@query, @sel_types, params[:mode] == :and)
 	end
 
 	private
 
 	# returns all items which contain each word in the query as part of some word in its title or description
-	def find_items(query, sel_types)
+	def find_items(query, sel_types, and_mode)
 
 		# split the query into an array. \W means any "non-word" character
 		# and the "+" means to combine multiple delimiters
@@ -95,8 +95,8 @@ class ItemsController < ApplicationController
 				first = false
 				items = cur_set
 			else
-				items = items.intersection(cur_set)
-				# can be set to "merge" instead of "intersection" for OR behavior
+				items = items.intersection(cur_set) if and_mode
+				items = items.merge(cur_set) unless and_mode
 			end
 		end
 
