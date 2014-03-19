@@ -62,16 +62,17 @@ class ItemsController < ApplicationController
 	end
 
 	def search
-		@types = Type.all
+		# the default search mode is OR
+		@sel_mode = params[:mode] || 'or'
+		@all_types = Type.all.to_set
 
 		# per default all types are selected
-		@sel_types = @types
-		@sel_types = Type.where(:id => params[:sel_types]).to_set if !params[:sel_types].nil?
+		@sel_types = @all_types
+		@sel_types = Type.where(:id => params[:sel_types]).to_set unless params[:sel_types].nil?
 
-		@query = params[:query]
-		@query = "" if @query.nil?
+		@query = params[:query] || ""
 
-		@items = find_items(@query, @sel_types, params[:mode] == :and)
+		@items = find_items(@query, @sel_types, @sel_mode == 'and')
 	end
 
 	private

@@ -9,15 +9,15 @@
 	<%= text_field_tag(:query, @query) %>
 
 	<%= select_tag(:mode, options_for_select([
-		['each word', :and],
-		['at least one word', :or]
-		], :and)) %>
+		['each word', 'and'],
+		['at least one word', 'or']
+		], @sel_mode)) %>
 
 
 	<br>
 	<br>
 
-	<% @types.each do |type| %>
+	<% @all_types.each do |type| %>
 		<%= check_box_tag("sel_types[]", type.id, @sel_types.member?(type)) %>
 		<%= label_tag(type, type.title) %>
 	<% end %>
@@ -39,7 +39,6 @@
 	      <th>Title</th>
 	      <th>Description</th>
 	      <th>Lost by</th>
-	      <th></th>
 	    </tr>
 	  </thead>
 
@@ -50,7 +49,6 @@
 	        <td><%= item.title %></td>
 	        <td><%= item.description %></td>
 	        <td><%= item.owner %></td>
-	        <td><%= link_to 'Details', item %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>
