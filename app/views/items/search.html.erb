@@ -8,7 +8,7 @@
 
 <%= form_tag("search", method: "get") do %>
 	<%= label_tag(:query, "Search for:") %>
-	<%= text_field_tag(:query) %>
+	<%= text_field_tag(:query, @query) %>
 
 	<br>
 	<br>
