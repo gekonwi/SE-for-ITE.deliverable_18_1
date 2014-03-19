@@ -1,7 +1,5 @@
 <p>
-	Use any parts of the item's title or description to search for it. <br>
-	Searching for the "Magic Mouse" build by Apple you could even write: <br>
-	"mouse apple MAG"
+	Type in any part of any word in the item's title or description. Any order works.
 </p>
 
 	<br>
@@ -34,6 +32,7 @@
 	      <th>Type</th>
 	      <th>Title</th>
 	      <th>Description</th>
+	      <th>Lost by</th>
 	      <th></th>
 	    </tr>
 	  </thead>
@@ -44,6 +43,7 @@
 	        <td><%= item.type.title %></td>
 	        <td><%= item.title %></td>
 	        <td><%= item.description %></td>
+	        <td><%= item.owner %></td>
 	        <td><%= link_to 'Details', item %></td>
 	      </tr>
 	    <% end %>
