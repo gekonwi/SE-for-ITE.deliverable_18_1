@@ -9,14 +9,8 @@
 	<br>
 	<br>
 
-	<%= radio_button_tag(:types, "all", checked: true) %>
-	<%= label_tag(:types_all, "all item types") %>
-	<br>
-	<%= radio_button_tag(:types, "specific") %>
-	<%= label_tag(:types_specific, "specific item types:") %>
-
 	<% @types.each do |type| %>
-		<%= check_box_tag(type) %>
+		<%= check_box_tag("sel_types[]", type, @sel_types.member?(type)) %>
 		<%= label_tag(type, type) %>
 	<% end %>
 

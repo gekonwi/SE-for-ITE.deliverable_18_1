@@ -63,6 +63,9 @@ class ItemsController < ApplicationController
 
   def search
     @types = ["PC Hardware", "Software", "Clothes", "Furniture", "Food"]
+    @sel_types = @types
+    @sel_types = params[:sel_types].to_set if !params[:sel_types].nil?
+
     @items = []
 
     return if params[:query].nil? || params[:query] == ""
