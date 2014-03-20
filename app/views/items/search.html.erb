@@ -1,33 +1,41 @@
-<p>
-	Type in any part of any word in the item's title or description. Any order works.
-</p>
-
-<%= form_tag("search", method: "get") do %>
-	<%= label_tag(:query, "Search for:") %>
-	<%= text_field_tag(:query, @query) %>
-
-	<%= select_tag(:mode, options_for_select([
-		['each word', 'and'],
-		['at least one word', 'or']
-		], @sel_mode)) %>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+	<h1>Start your search</h1>
+	<ul class="lead">
+		<li>will look in title and description</li>
+		<li>use whole words or just parts of them</li>
+		<li>any order works</li>
+	</ul>
 
 	<br>
-	<br>
 
-	<% @all_types.each do |type| %>
-		<%= check_box_tag("sel_types[]", type.id, @sel_types.member?(type)) %>
-		<%= label_tag(type, type.title) %>
+	<%= form_tag "search", method: "get", class: "form-search" do %>
+
+	<p>
+		<ul class="list-inline">
+			<% @all_types.each do |type| %>
+			<li>
+				<%= check_box_tag("sel_types[]", type.id, @sel_types.member?(type)) %>
+				<%= label_tag(type, type.title) %>
+			</li>
+			<% end %>
+		</ul>
+	</p>
+
+	<p>
+		<%= select_tag :mode, options_for_select([['each word', 'and'], ['at least one word', 'or']
+		], @sel_mode), class: "dropdown" %>
+
+		<%= text_field_tag :query, @query, class: "input-medium search-query" %>
+		<%= submit_tag "Search",  class: "btn btn-primary btn-lg", role: "button" %>
+	</p>
+
 	<% end %>
-
-	<br>
-	<br>
-
-	<%= submit_tag("Search") %>
-<% end %>
+</div>
 
 <br>
 <br>
 
 <% @items.any? do %>
-	<%= render partial: 'table', locals: {show_links: false} %>
+<%= render partial: 'table', locals: {show_links: false} %>
 <% end %>
