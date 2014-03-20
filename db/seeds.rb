@@ -9,18 +9,18 @@
 Type.destroy_all
 Item.destroy_all
 
-type_titles = ["PC Hardware", "Clothes", "Furniture", "Food"]
+type_titles = ["Technics", "Clothes", "Office accessoires", "Food"]
 type_titles.each {|type| Type.create(title: type)}
 
 items = Hash.new
 
-items["PC Hardware"] = ["keyboard", "mouse", "LCD", "cooler", "graphic card", "cpu", "mainboard", "RAM", "hard disk", "blu-ray drive"]
+items["Technics"] = ["keyboard", "mouse", "dvd", "cd", "notebook", "charger", "lamp", "phone", "tablet"]
 items["Clothes"] = %w{shirt pants socks jacket coat gloves hat shoes jeans pullover hoody}
-items["Furniture"] = %w{table desk chair bed bookshelf cupboard closet safe bedstand couch sofa}
-items["Food"] = %w{beef pork chicken bacon ham lamb liver kidneys turkey duck sausages salami apple orange banana pear peach lemon
-	lime plum melon grape mango kiwi apricot pineapple blackberry blackcurrant redcurrant blueberry strawberry raspberry gooseberry
-	rhubarb cod haddock plaice tuna salmon trout mackerel herring sardine pilchard sole anchovy toast jam marmalade breakfast cereal
-	cornflakes muesli porridge}
+items["Office accessoires"] = %w{ruler pen pencil block marker rubber calendar planer scissors}
+items["Food"] = %w{beef pork chicken bacon ham sausages salami apple orange banana peach lemon
+	lime plum melon grape mango kiwi apricot pineapple blackberry blackcurrant blueberry strawberry raspberry gooseberry
+	rhubarb cod tuna salmon trout mackerel herring sardine pilchard sole anchovy toast jam marmalade cornflakes muesli
+	porridge hamburger}
 
 	positive_adjectives = ['good', 'super', 'fine', 'usable', 'pretty', 'probably usable' ]
 	negative_adjectives = ['damaged', 'squeezed', 'dirty', 'scratched', 'water damaged', 'bended', 'broken' ]
@@ -57,7 +57,7 @@ items["Food"] = %w{beef pork chicken bacon ham lamb liver kidneys turkey duck sa
 					type = Type.all.sample
 
 					title = items[type.title].sample
-					title += " (#{colors.sample})" if ["Clothes", "Furniture"].include?(type.title) && rand(2) == 0
+					title += " (#{colors.sample})" if ["Clothes", "Office accessoires"].include?(type.title) && rand(2) == 0
 
 					case rand(4)
 					when 0

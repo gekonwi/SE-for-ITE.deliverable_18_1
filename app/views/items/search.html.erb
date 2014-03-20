@@ -2,8 +2,6 @@
 	Type in any part of any word in the item's title or description. Any order works.
 </p>
 
-<br>
-
 <%= form_tag("search", method: "get") do %>
 	<%= label_tag(:query, "Search for:") %>
 	<%= text_field_tag(:query, @query) %>
@@ -12,7 +10,6 @@
 		['each word', 'and'],
 		['at least one word', 'or']
 		], @sel_mode)) %>
-
 
 	<br>
 	<br>
