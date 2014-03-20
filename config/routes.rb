@@ -1,5 +1,7 @@
 Lostandfound::Application.routes.draw do
 
+	root "items#search"
+
 	get "items" => 'items#index'
 	get "items/search"
 
