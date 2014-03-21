@@ -25,18 +25,14 @@ class ItemsController < ApplicationController
 
 	# returns all items which contain each word in the query as part of some word in its title or description
 	def find_items(query, sel_types, and_mode)
+		args = {type_ids: sel_types.map {|type| type.id}}
 
 		# split the query into an array. \W means any "non-word" character
 		# and the "+" means to combine multiple delimiters
-		words = query.split(/\W+/)
-
-		items = Set.new
-		type_ids = sel_types.map {|type| type.id}
-
-		first = true
-		words.each do |word|
-			q = "%#{word}%"
-			cur_set = Item.where("type_id IN (?) AND (title LIKE ? OR description LIKE ?)", type_ids, q, q).to_set
+		items = []; first = true
+		query.split(/\W+/).each do |word|
+			args[:q] = "%#{word}%"
+			cur_set = Item.joins(:type).where(find_items_conditions, args).to_set
 
 			if first
 				first = false
@@ -48,5 +44,17 @@ class ItemsController < ApplicationController
 		end
 
 		items
+	end
+
+	def find_items_conditions
+		type_condition = "type_id IN (:type_ids)"
+
+		like_conditions = []
+		like_conditions << "items.title LIKE :q"
+		like_conditions << "items.description LIKE  :q"
+		like_conditions << "items.owner LIKE :q"
+		like_conditions << "types.title LIKE :q"
+
+		return "#{type_condition} AND (#{like_conditions.join(' OR ')})"
 	end
 end

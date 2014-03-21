@@ -4,14 +4,14 @@
 <div class="jumbotron">
 	<h1>Start your search</h1>
 	<ul class="lead">
-		<li>will look in title and description</li>
+		<li>will search everywhere (type, title, description, and owner)</li>
 		<li>use whole words or just parts of them</li>
 		<li>any order works</li>
 	</ul>
 
 	<br>
 
-	<%= form_tag "search", method: "get", class: "form-search" do %>
+	<%= form_tag "/items/search", method: "get", class: "form-search" do %>
 
 	<p>
 		<ul class="list-inline">
